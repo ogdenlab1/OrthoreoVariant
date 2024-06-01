@@ -4,6 +4,8 @@ import fnmatch
 import argparse
 from pathlib import Path
 
+#to do: add ability to parse viral annotation input for gene-level annotation
+
 def getCoverage(cov_file, sample, df):
     df_depth = pd.read_csv(cov_file, sep="\t", header=0)
     total_depth = sum(df_depth["Coverage"])
@@ -97,8 +99,6 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("Sample_List",
                         help="A tab delineated file with each line containing sample names. Last line is empty.")
-    parser.add_argument("Virus",
-                        help="MHV (AY910861.1), MERS (JX869059.2), SARS2 (MT020881.1), or other (no genome defined)")
     parser.add_argument("Working_Directory", help="Path to directory containing data to align.")
     parser.add_argument("Experiment", help="Experiment name.")
     parser.add_argument("--freq", help="Variant frequency cutoff for filtering. Decimal between 0 and 1.", default=0, required=False)
