@@ -21,45 +21,47 @@ Code utilized in Ogden lab to analyze viral SNVs found in Illumina datasets.
 
 * Code can be downloaded directly from this repo. Bash commands can be adjusted as necessary
 
-### Executing program
+### Preprocessing, alignment, and variant calling
 
-* How to run the program
-* Step-by-step bullets
+* Bash script assumes Trimmomatic and BBMap are installed in the home directory
+* Samtools, bowtie2, and LoFreq must be installed via an environment variable
+* Script must be run in directory with raw data and reference files and reference Bowtie2 index.
+* FASTQ extensions are specific to VUMC Vantage core. You may have to change them to work with your system.
+* samples.txt is a file with each sample name on a line and present in the raw data file where the script is run. NOTE: If you are wanting to use an alias, this script does not rename the files.
 ```
-code blocks for commands
+sh ./VirVariant_alignment.sh SA11 SA11.fa
+```
+
+### Variant processing
+
+* Bash script assumes Trimmomatic and BBMap are installed in the home directory
+* Samtools, bowtie2, and LoFreq must be installed via an environment variable
+* Script must be run in directory with raw data and reference files and reference Bowtie2 index.
+* FASTQ extensions are specific to VUMC Vantage core. You may have to change them to work with your system.
+```
+python ./VirVariant.py samples.txt ~/Projects/SA11_variants/ SA11_analysis
 ```
 
 ## Help
 
-Any advise for common problems or issues.
 ```
-command to run if program contains helper info
+python ./VirVariant.py -h
+usage: VirVariant.py [-h] [--freq FREQ] [--file_tag FILE_TAG] Sample_List Working_Directory Experiment
+
+positional arguments:
+  Sample_List          A tab delineated file with each line containing sample names.
+  Working_Directory    Path to directory containing data to align.
+  Experiment           Experiment name.
+
+options:
+  -h, --help           show this help message and exit
+  --freq FREQ          Variant frequency cutoff for filtering. Decimal between 0 and 1.
+  --file_tag FILE_TAG  File naming tag can denote filters used for variant isolation.
 ```
 
 ## Authors
 
 Contributors names and contact info
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+Jennifer Gribble (Bowser)  
+jgribble.bowser@gmail.com
